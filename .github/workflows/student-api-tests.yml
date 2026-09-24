@@ -9,7 +9,21 @@ jobs:
   testes:
     runs-on: ubuntu-latest
 
+    # A API conecta no MongoDB ao iniciar (src/database/db.js) e popula o banco
+    # com o seed usado pelos testes; sem este serviço ela não sobe.
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
+        options: >-
+          --health-cmd "mongosh --eval 'db.runCommand({ ping: 1 })'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     env:
+      MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
       BASE_URL: http://localhost:3000
 
     steps:
