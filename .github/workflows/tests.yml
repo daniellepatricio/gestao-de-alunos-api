@@ -21,6 +21,10 @@ jobs:
           --health-timeout 5s
           --health-retries 5
 
+    env:
+      MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+      BASE_URL: http://localhost:3000
+
     steps:
       - name: Checkout do código
         uses: actions/checkout@v4
@@ -28,13 +32,23 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
           cache: npm
 
       - name: Instalar dependências
         run: npm ci
 
+      # Os testes de test/external/ fazem requisições HTTP para BASE_URL,
+      # então a API precisa estar rodando antes do npm test.
+      - name: Subir a API em segundo plano
+        run: npm start > api.log 2>&1 &
+
+      - name: Aguardar a API responder
+        run: curl --silent --fail --retry 30 --retry-connrefused --retry-delay 1 http://localhost:3000/
+
       - name: Executar testes
         run: npm test
-        env:
-          MONGODB_URI: mongodb://127.0.0.1:27017/gestao-de-alunos-test
+
+      - name: Log da API (em caso de falha)
+        if: failure()
+        run: cat api.log

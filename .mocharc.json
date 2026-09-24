@@ -4,5 +4,6 @@
     "test/external/registrarEntregaTrabalho.test.js",
     "test/**/*.test.js"
   ],
+  "require": ["test/hooks.js"],
   "timeout": 10000
 }
