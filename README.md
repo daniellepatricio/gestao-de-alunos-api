@@ -434,7 +434,7 @@ Nos cenários de sucesso, o teste confere `id`, `alunoId`, `disciplinaId`, `titu
 
 ### Pipeline (GitHub Actions)
 
-O workflow [`.github/workflows/testes.yml`](.github/workflows/testes.yml) roda a cada `push`,
+O workflow [`.github/workflows/student-api-tests.yml`](.github/workflows/student-api-tests.yml) roda a cada `push`,
 `pull_request` ou manualmente (`workflow_dispatch`), em `ubuntu-latest` com Node 24:
 
 1. Faz checkout do código e instala as dependências com `npm ci`
