@@ -1,0 +1,8 @@
+{
+  "spec": [
+    "test/external/cadastrarAluno.test.js",
+    "test/external/registrarEntregaTrabalho.test.js",
+    "test/**/*.test.js"
+  ],
+  "timeout": 10000
+}

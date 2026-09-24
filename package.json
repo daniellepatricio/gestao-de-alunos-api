@@ -7,7 +7,10 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "test": "mocha test/**/*.test.js --exit"
+    "test": "mocha",
+    "test:cadastrar-aluno": "mocha --no-config --timeout 10000 test/external/cadastrarAluno.test.js",
+    "test:registrar-entrega-trabalho": "mocha --no-config --timeout 10000 test/external/registrarEntregaTrabalho.test.js",
+    "test:demais": "mocha --ignore test/external/cadastrarAluno.test.js --ignore test/external/registrarEntregaTrabalho.test.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,13 +22,18 @@
     "js-yaml": "^4.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^9.9.3",
+    "dotenv": "^18.0.2",
     "morgan": "^1.10.0",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
     "chai": "^6.2.2",
-    "mocha": "^11.8.0",
+    "mocha": "^12.0.2",
     "nodemon": "^3.1.4",
+    "sinon": "^22.1.0",
     "supertest": "^7.2.2"
+  },
+  "allowScripts": {
+    "@scarf/scarf@1.4.0": true
   }
 }

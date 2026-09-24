@@ -1,0 +1,133 @@
+{
+  "cadastroComSucesso": [
+    {
+      "descricao": "deve cadastrar um novo aluno quando o admin informar dados válidos",
+      "token": "admin",
+      "aluno": {
+        "nome": "Danielle Braga",
+        "email": "daniellebraga@example.com",
+        "matricula": "2026-011",
+        "senha": "123456"
+      },
+      "statusEsperado": 201
+    }
+  ],
+  "cadastroComFalha": [
+    {
+      "descricao": "deve retornar 409 quando já existir aluno com a mesma matrícula e e-mail",
+      "token": "admin",
+      "aluno": {
+        "nome": "Ana Souza",
+        "email": "ana.souza@example.com",
+        "matricula": "2024001",
+        "senha": "123456"
+      },
+      "statusEsperado": 409,
+      "mensagemEsperada": "Já existe um aluno cadastrado com essa matrícula ou e-mail."
+    },
+    {
+      "descricao": "deve retornar 409 quando já existir aluno com a mesma matrícula",
+      "token": "admin",
+      "aluno": {
+        "nome": "Outra Ana",
+        "email": "outra.ana@example.com",
+        "matricula": "2024001",
+        "senha": "123456"
+      },
+      "statusEsperado": 409,
+      "mensagemEsperada": "Já existe um aluno cadastrado com essa matrícula ou e-mail."
+    },
+    {
+      "descricao": "deve retornar 409 quando já existir aluno com o mesmo e-mail",
+      "token": "admin",
+      "aluno": {
+        "nome": "Bruno Duplicado",
+        "email": "bruno.lima@example.com",
+        "matricula": "MATRICULA-NOVA-409",
+        "senha": "123456"
+      },
+      "statusEsperado": 409,
+      "mensagemEsperada": "Já existe um aluno cadastrado com essa matrícula ou e-mail."
+    },
+    {
+      "descricao": "deve retornar 400 quando o nome não for informado",
+      "token": "admin",
+      "aluno": {
+        "email": "sem.nome@example.com",
+        "matricula": "SEM-NOME-001",
+        "senha": "123456"
+      },
+      "statusEsperado": 400,
+      "mensagemEsperada": "Os campos \"nome\", \"email\", \"matricula\" e \"senha\" são obrigatórios."
+    },
+    {
+      "descricao": "deve retornar 400 quando o e-mail não for informado",
+      "token": "admin",
+      "aluno": {
+        "nome": "Aluno Sem Email",
+        "matricula": "SEM-EMAIL-001",
+        "senha": "123456"
+      },
+      "statusEsperado": 400,
+      "mensagemEsperada": "Os campos \"nome\", \"email\", \"matricula\" e \"senha\" são obrigatórios."
+    },
+    {
+      "descricao": "deve retornar 400 quando a matrícula não for informada",
+      "token": "admin",
+      "aluno": {
+        "nome": "Aluno Sem Matricula",
+        "email": "sem.matricula@example.com",
+        "senha": "123456"
+      },
+      "statusEsperado": 400,
+      "mensagemEsperada": "Os campos \"nome\", \"email\", \"matricula\" e \"senha\" são obrigatórios."
+    },
+    {
+      "descricao": "deve retornar 400 quando a senha não for informada",
+      "token": "admin",
+      "aluno": {
+        "nome": "Aluno Sem Senha",
+        "email": "sem.senha@example.com",
+        "matricula": "SEM-SENHA-001"
+      },
+      "statusEsperado": 400,
+      "mensagemEsperada": "Os campos \"nome\", \"email\", \"matricula\" e \"senha\" são obrigatórios."
+    },
+    {
+      "descricao": "deve retornar 401 quando o token não for informado",
+      "token": "ausente",
+      "aluno": {
+        "nome": "Aluno Sem Token",
+        "email": "aluno.sem.token@example.com",
+        "matricula": "SEM-TOKEN-001",
+        "senha": "123456"
+      },
+      "statusEsperado": 401,
+      "mensagemEsperada": "Token de autenticação não informado."
+    },
+    {
+      "descricao": "deve retornar 401 quando o token for inválido",
+      "token": "invalido",
+      "aluno": {
+        "nome": "Aluno Token Invalido",
+        "email": "aluno.token.invalido@example.com",
+        "matricula": "TOKEN-INVALIDO-001",
+        "senha": "123456"
+      },
+      "statusEsperado": 401,
+      "mensagemEsperada": "Token de autenticação inválido ou expirado."
+    },
+    {
+      "descricao": "deve retornar 403 quando um aluno autenticado tentar cadastrar outro aluno",
+      "token": "aluno",
+      "aluno": {
+        "nome": "Aluno Sem Permissao",
+        "email": "aluno.sem.permissao@example.com",
+        "matricula": "SEM-PERMISSAO-001",
+        "senha": "123456"
+      },
+      "statusEsperado": 403,
+      "mensagemEsperada": "Você não tem permissão para acessar este recurso."
+    }
+  ]
+}
