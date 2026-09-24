@@ -1,4 +1,41 @@
+# Dependências
 node_modules/
-npm-debug.log*
+
+# Variáveis de ambiente (credenciais locais) — o modelo .env.example é versionado
 .env
+.env.*
+!.env.example
+
+# Logs (inclui o api.log gerado pela pipeline)
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Relatórios de testes e cobertura
+coverage/
+.nyc_output/
+mochawesome-report/
+test-results/
+reports/
+
+# Caches e arquivos temporários
+.npm/
+.eslintcache
+.cache/
+tmp/
+temp/
+*.tmp
+
+# Configurações locais de editores/IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos de sistema operacional
 .DS_Store
+Thumbs.db
+desktop.ini

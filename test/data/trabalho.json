@@ -1,0 +1,109 @@
+{
+  "entregaComSucesso": [
+    {
+      "descricao": "deve registrar a entrega de um trabalho em uma disciplina em que o aluno está matriculado",
+      "token": "aluno",
+      "alunoId": "proprio",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "titulo": "Lista de Exercícios 2",
+        "descricao": "Resolução dos exercícios de 21 a 40 do capítulo 2."
+      },
+      "statusEsperado": 201
+    },
+    {
+      "descricao": "deve registrar a entrega de um trabalho sem descrição, pois o campo é opcional",
+      "token": "aluno",
+      "alunoId": "proprio",
+      "trabalho": {
+        "disciplinaId": "disciplina-programacao-web",
+        "titulo": "Formulário de Contato"
+      },
+      "statusEsperado": 201
+    }
+  ],
+  "entregaComFalha": [
+    {
+      "descricao": "deve retornar 400 quando o título não for informado",
+      "token": "aluno",
+      "alunoId": "proprio",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "descricao": "Entrega sem título."
+      },
+      "statusEsperado": 400,
+      "mensagemEsperada": "Os campos \"disciplinaId\" e \"titulo\" são obrigatórios."
+    },
+    {
+      "descricao": "deve retornar 400 quando a disciplina não for informada",
+      "token": "aluno",
+      "alunoId": "proprio",
+      "trabalho": {
+        "titulo": "Entrega sem disciplina",
+        "descricao": "Entrega sem disciplinaId."
+      },
+      "statusEsperado": 400,
+      "mensagemEsperada": "Os campos \"disciplinaId\" e \"titulo\" são obrigatórios."
+    },
+    {
+      "descricao": "deve retornar 401 quando o token não for informado",
+      "token": "ausente",
+      "alunoId": "proprio",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "titulo": "Entrega sem autenticação",
+        "descricao": "Tentativa de entrega sem token."
+      },
+      "statusEsperado": 401,
+      "mensagemEsperada": "Token de autenticação não informado."
+    },
+    {
+      "descricao": "deve retornar 401 quando o token for inválido",
+      "token": "invalido",
+      "alunoId": "proprio",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "titulo": "Entrega com token inválido",
+        "descricao": "Tentativa de entrega com token inválido."
+      },
+      "statusEsperado": 401,
+      "mensagemEsperada": "Token de autenticação inválido ou expirado."
+    },
+    {
+      "descricao": "deve retornar 403 quando o aluno tentar registrar trabalho em nome de outro aluno",
+      "token": "aluno",
+      "alunoId": "aluno-bruno-lima",
+      "trabalho": {
+        "disciplinaId": "disciplina-matematica",
+        "titulo": "Entrega em nome de outro aluno",
+        "descricao": "Tentativa de entrega para outro aluno."
+      },
+      "statusEsperado": 403,
+      "mensagemEsperada": "Você só pode acessar os seus próprios dados."
+    },
+    {
+      "descricao": "deve retornar 404 quando a disciplina não existir",
+      "token": "aluno",
+      "alunoId": "proprio",
+      "trabalho": {
+        "disciplinaId": "disciplina-inexistente",
+        "titulo": "Entrega em disciplina inexistente",
+        "descricao": "Teste."
+      },
+      "statusEsperado": 404,
+      "mensagemEsperada": "Disciplina com id \"disciplina-inexistente\" não encontrada."
+    },
+    {
+      "descricao": "deve retornar 409 quando o aluno não estiver matriculado na disciplina",
+      "token": "aluno",
+      "alunoId": "proprio",
+      "trabalho": {
+        "disciplinaId": "disciplina-historia",
+        "titulo": "Lista de Exercícios 1",
+        "descricao": "Resolução dos exercícios de 1 a 20 do capítulo 2."
+      },
+      "statusEsperado": 409,
+      "mensagemEsperada": "O aluno não está matriculado nesta disciplina."
+    }
+  ]
+}
